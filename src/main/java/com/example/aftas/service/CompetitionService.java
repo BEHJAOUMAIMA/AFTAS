@@ -1,6 +1,5 @@
 package com.example.aftas.service;
 
-
 import com.example.aftas.domain.Competition;
 
 import java.util.List;
