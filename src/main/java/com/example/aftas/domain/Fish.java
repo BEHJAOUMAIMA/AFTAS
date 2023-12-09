@@ -1,5 +1,6 @@
 package com.example.aftas.domain;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "huntings")
-public class Hunting {
+@Table(name = "fishes")
+public class Fish {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer umberOfFish;
+    private String name;
+    private Double averageWeight;
+
 }
