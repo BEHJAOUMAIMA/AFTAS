@@ -22,4 +22,10 @@ public class Ranking {
 
     private Integer score;
 
+    @ManyToOne
+    private Member member;
+
+    @ManyToOne
+    private Competition competition;
+
 }

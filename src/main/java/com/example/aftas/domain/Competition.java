@@ -1,6 +1,11 @@
 package com.example.aftas.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +14,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,5 +41,9 @@ public class Competition {
     private String Location;
 
     private Double amount;
+
+    @OneToMany(mappedBy = "competition")
+    private List<Ranking> rankings;
+
 
 }

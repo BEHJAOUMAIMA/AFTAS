@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,5 +25,8 @@ public class Level {
     private String description;
 
     private Integer points;
+
+    @OneToMany(mappedBy = "level")
+    private List<Fish> fishes;
 
 }

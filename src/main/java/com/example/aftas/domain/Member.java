@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,5 +33,11 @@ public class Member {
     private IdentityDocumentType identityDocumentType;
 
     private String identityNumber;
+
+    @OneToMany(mappedBy = "member")
+    private List<Ranking> rankings;
+
+    @OneToMany(mappedBy = "member")
+    private List<Hunting> huntings;
 
 }
