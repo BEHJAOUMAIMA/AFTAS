@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -31,9 +32,9 @@ public class Competition {
 
     private LocalDate date;
 
-    private LocalDateTime startTime;
+    private LocalTime startTime;
 
-    private LocalDateTime endTime;
+    private LocalTime endTime;
 
     private Integer NumberOfParticipants;
 
