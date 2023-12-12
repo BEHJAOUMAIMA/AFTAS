@@ -47,21 +47,36 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public Competition update(Competition competitionUpdated, Long id) {
-        Optional<Competition> competition = competitionRepository.findById(id);
-        if (competition.isPresent()) {
-            Competition existingCompetition = competition.get();
-            existingCompetition.setCode(existingCompetition.getCode());
-            existingCompetition.setDate(existingCompetition.getDate());
-            existingCompetition.setStartTime(existingCompetition.getStartTime());
-            existingCompetition.setEndTime(existingCompetition.getEndTime());
-            existingCompetition.setNumberOfParticipants(existingCompetition.getNumberOfParticipants());
-            existingCompetition.setLocation(existingCompetition.getLocation());
-            existingCompetition.setAmount(existingCompetition.getAmount());
-            return competitionRepository.save(existingCompetition);
-        } else {
-            return null;
+
+        Competition existingCompetition = competitionRepository.findById(id)
+                    .orElseThrow(() -> new OperationException("Competition not found"));
+
+        Competition competitionWithSameDate = competitionRepository.findByDate(competitionUpdated.getDate());
+        if (competitionWithSameDate != null && !competitionWithSameDate.getId().equals(id)) {
+            throw new OperationException("There is already a competition on " + competitionUpdated.getDate());
         }
+
+        if (competitionUpdated.getStartTime().isAfter(competitionUpdated.getEndTime())) {
+            throw new OperationException("Start time must be before end time");
+        }
+
+        existingCompetition.setDate(competitionUpdated.getDate());
+        existingCompetition.setStartTime(competitionUpdated.getStartTime());
+        existingCompetition.setEndTime(competitionUpdated.getEndTime());
+        existingCompetition.setNumberOfParticipants(competitionUpdated.getNumberOfParticipants());
+        existingCompetition.setLocation(competitionUpdated.getLocation());
+        existingCompetition.setAmount(competitionUpdated.getAmount());
+
+        if (!existingCompetition.getDate().equals(competitionUpdated.getDate()) ||
+                !existingCompetition.getLocation().equals(competitionUpdated.getLocation())) {
+            String code = generateCode(competitionUpdated.getLocation(), competitionUpdated.getDate());
+            existingCompetition.setCode(code);
+        }
+
+        return competitionRepository.save(existingCompetition);
+
     }
+
 
     @Override
     public void delete(Long id) {

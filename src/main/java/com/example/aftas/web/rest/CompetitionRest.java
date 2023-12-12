@@ -43,4 +43,14 @@ public class CompetitionRest {
         }
     }
 
+    @PutMapping("/update/{competitionId}")
+    public ResponseEntity<ResponseMessage> updateCompetition(@PathVariable Long competitionId, @Valid @RequestBody CompetitionRequestDTO updatedCompetitionRequestDTO) {
+
+        Competition updatedCompetition = updatedCompetitionRequestDTO.toCompetition();
+        Competition competition = competitionService.update(updatedCompetition, competitionId);
+
+        return ResponseEntity.ok(ResponseMessage.created("Competition updated successfully", competition).getBody());
+    }
+
+
 }
