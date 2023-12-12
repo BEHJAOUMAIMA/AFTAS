@@ -33,9 +33,9 @@ public class Competition {
 
     private LocalTime endTime;
 
-    private Integer NumberOfParticipants;
+    private Integer numberOfParticipants;
 
-    private String Location;
+    private String location;
 
     private Double amount;
 

@@ -1,7 +1,10 @@
 package com.example.aftas.handler.exception;
 
+import com.example.aftas.handler.response.ResponseMessage;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +23,14 @@ public class CustomExceptionHandler {
                 .stream()
                 .collect(Collectors.groupingBy(FieldError::getField, Collectors.mapping(FieldError::getDefaultMessage, Collectors.toList())));
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(OperationException.class)
+    public ResponseEntity<ResponseMessage> handleOperationException(OperationException ex) {
+
+        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+
+        return ResponseEntity.badRequest().body(responseMessage);
     }
 
 
