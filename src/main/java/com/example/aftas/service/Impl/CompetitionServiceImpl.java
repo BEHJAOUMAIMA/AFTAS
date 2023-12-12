@@ -37,13 +37,21 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public List<Competition> findAll() {
-        return competitionRepository.findAll();
-    }
+        List<Competition> competitions = competitionRepository.findAll();
+
+        if (competitions.isEmpty()) {
+            throw new OperationException("No competitions found");
+        }
+
+        return competitions;    }
 
     @Override
     public Optional<Competition> findById(Long id) {
-        return competitionRepository.findById(id);
-    }
+        if (id <= 0) {
+            throw new OperationException("ID must be greater than 0");
+        }
+
+        return competitionRepository.findById(id);    }
 
     @Override
     public Competition update(Competition competitionUpdated, Long id) {
@@ -80,8 +88,16 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public void delete(Long id) {
-        competitionRepository.deleteById(id);
-    }
+        if (id <= 0) {
+            throw new OperationException("ID must be greater than 0");
+        }
+
+        Optional<Competition> competitionOptional = competitionRepository.findById(id);
+        if (competitionOptional.isEmpty()) {
+            throw new OperationException("Competition not found with ID: " + id);
+        }
+
+        competitionRepository.deleteById(id);    }
 
     @Override
     public String generateCode(String location, LocalDate date) {

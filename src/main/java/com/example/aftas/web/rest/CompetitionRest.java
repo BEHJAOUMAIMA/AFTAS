@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/competitions")
@@ -33,6 +33,19 @@ public class CompetitionRest {
         return ResponseEntity.ok(competitionResponseDTOS);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCompetitionById(@PathVariable Long id) {
+        Optional<Competition> competition = competitionService.findById(id);
+
+        if (competition.isEmpty()) {
+            return ResponseMessage.notFound("Competition not found with ID: " + id);
+        }
+
+        CompetitionResponseDTO competitionResponseDTO = CompetitionResponseDTO.fromCompetition(competition.get());
+        return ResponseEntity.ok(competitionResponseDTO);
+    }
+
+
     @PostMapping("/save")
     public ResponseEntity<ResponseMessage> addCompetition(@Valid @RequestBody CompetitionRequestDTO competitionRequestDTO) {
         Competition competition = competitionService.save(competitionRequestDTO.toCompetition());
@@ -50,6 +63,20 @@ public class CompetitionRest {
         Competition competition = competitionService.update(updatedCompetition, competitionId);
 
         return ResponseEntity.ok(ResponseMessage.created("Competition updated successfully", competition).getBody());
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCompetition(@PathVariable Long id) {
+        Optional<Competition> existingCompetition = competitionService.findById(id);
+
+        if (existingCompetition.isEmpty()) {
+            return ResponseMessage.notFound("Competition not found with ID: " + id);
+        }
+
+        competitionService.delete(id);
+
+        return ResponseMessage.ok("Competition deleted successfully with ID: " + id, null);
     }
 
 
