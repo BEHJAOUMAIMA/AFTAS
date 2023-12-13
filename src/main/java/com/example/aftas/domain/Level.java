@@ -1,5 +1,6 @@
 package com.example.aftas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,7 @@ public class Level {
     private Integer points;
 
     @OneToMany(mappedBy = "level")
+    @JsonIgnore
     private List<Fish> fishes;
 
 }

@@ -12,7 +12,7 @@ public interface FishService {
     Fish save(Fish fish);
     List<Fish> findAll();
     Optional<Fish> findById(Long id);
-    Fish update(Fish fishUpdated);
+    Fish update(Fish fishUpdated, Long id);
     void delete(Long id);
 
 }

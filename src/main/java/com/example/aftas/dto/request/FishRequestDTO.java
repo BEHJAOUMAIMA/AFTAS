@@ -1,6 +1,7 @@
 package com.example.aftas.dto.request;
 
 import com.example.aftas.domain.Fish;
+import com.example.aftas.domain.Level;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -14,14 +15,21 @@ public record FishRequestDTO(
         String name,
 
         @Positive(message = "Average weight must be a positive number")
-        Double averageWeight
+        Double averageWeight,
+
+        @NotNull(message = "the Level Id cannot be null")
+        Long levelId
+
+
 
 ) {
 
     public Fish toFish(){
-        return Fish.builder()
-                .name(this.name)
-                .averageWeight(this.averageWeight)
-                .build();
+            return Fish.builder()
+                    .name(name)
+                    .averageWeight(averageWeight)
+                    .level(Level.builder().id(levelId).build())
+                    .build();
+        }
     }
-}
+
