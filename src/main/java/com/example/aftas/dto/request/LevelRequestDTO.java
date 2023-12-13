@@ -8,9 +8,7 @@ import jakarta.validation.constraints.Positive;
 
 public record LevelRequestDTO(
 
-        @NotBlank(message = "Level Code cannot be blank")
         @NotNull(message = "Level Code cannot be null")
-        @Min(value = 1, message = "Level Code must be greater than or equal to 1")
         Integer code,
 
         @NotNull(message = "Description of Level cannot be Null")

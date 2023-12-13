@@ -12,7 +12,7 @@ public interface LevelService {
     Level save(Level level);
     List<Level> findAll();
     Optional<Level> findById(Long id);
-    Level update(Level levelUpdated);
+    Level update(Level levelUpdated, Long id);
     void delete(Long id);
 
 }
