@@ -1,6 +1,7 @@
 package com.example.aftas.service;
 
 import com.example.aftas.domain.Competition;
+import com.example.aftas.domain.Ranking;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,4 +16,6 @@ public interface CompetitionService {
     Competition update(Competition competitionUpdated, Long id);
     void delete(Long id);
     String generateCode(String location, LocalDate date);
+    Competition getByCode(String code);
+
 }

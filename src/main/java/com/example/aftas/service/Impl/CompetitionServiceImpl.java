@@ -3,7 +3,9 @@ package com.example.aftas.service.Impl;
 import com.example.aftas.domain.Competition;
 import com.example.aftas.handler.exception.OperationException;
 import com.example.aftas.repository.CompetitionRepository;
+import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.CompetitionService;
+import com.example.aftas.service.MemberService;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -16,8 +18,10 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     private final CompetitionRepository competitionRepository;
 
+
     public CompetitionServiceImpl(CompetitionRepository competitionRepository) {
         this.competitionRepository = competitionRepository;
+
     }
 
     @Override
@@ -111,5 +115,11 @@ public class CompetitionServiceImpl implements CompetitionService {
 
         return locationCode + "-" + formattedDate;
     }
+
+    @Override
+    public Competition getByCode(String code) {
+        return competitionRepository.getCompetitionByCode(code);
+    }
+
 
 }

@@ -2,8 +2,11 @@ package com.example.aftas.web.rest;
 
 
 import com.example.aftas.domain.Competition;
+import com.example.aftas.domain.Ranking;
+import com.example.aftas.dto.request.AddMemberRequestDTO;
 import com.example.aftas.dto.request.CompetitionRequestDTO;
 import com.example.aftas.dto.response.CompetitionResponseDTO;
+import com.example.aftas.dto.response.RankingResponseDTO;
 import com.example.aftas.handler.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
 import jakarta.validation.Valid;
@@ -78,6 +81,8 @@ public class CompetitionRest {
 
         return ResponseMessage.ok("Competition deleted successfully with ID: " + id, null);
     }
+
+
 
 
 }
