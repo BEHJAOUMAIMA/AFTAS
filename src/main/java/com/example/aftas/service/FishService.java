@@ -15,4 +15,7 @@ public interface FishService {
     Fish update(Fish fishUpdated, Long id);
     void delete(Long id);
 
+    Fish getByName(String name);
+
+    List<Fish> getByLevel(Integer level);
 }

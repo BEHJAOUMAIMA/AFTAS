@@ -94,4 +94,14 @@ public class FishServiceImpl implements FishService {
 
         fishRepository.deleteById(id);
     }
+
+    @Override
+    public Fish getByName(String name) {
+        return fishRepository.findByName(name);
+    }
+
+    @Override
+    public List<Fish> getByLevel(Integer level) {
+        return null;
+    }
 }

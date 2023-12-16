@@ -55,4 +55,14 @@ public class MemberServiceImpl implements MemberService {
     public void delete(Long id) {
         memberRepository.deleteById(id);
     }
+
+    @Override
+    public Member getById(Long id) {
+        return memberRepository.getMemberById(id);
+    }
+
+    @Override
+    public List<Member> searchMembers(Long id, String name, String familyName) {
+        return memberRepository.searchMembers(id, name, familyName);
+    }
 }

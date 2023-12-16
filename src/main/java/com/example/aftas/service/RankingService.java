@@ -21,5 +21,6 @@ public interface RankingService {
     List<Ranking> sortParticipantsByScore(String competition);
     Ranking update(Ranking rankingUpdated);
     void delete(Ranking ranking);
+    List<Ranking> getPodium(String competitionCode);
 
 }

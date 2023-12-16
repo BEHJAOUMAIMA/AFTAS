@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Data
@@ -17,12 +19,18 @@ public class Hunting {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer umberOfFish;
+    private Integer NumberOfFish;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Fish fish;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Competition competition;
 
 }

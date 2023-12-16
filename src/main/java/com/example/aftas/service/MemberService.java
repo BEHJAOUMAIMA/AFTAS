@@ -14,5 +14,8 @@ public interface MemberService{
     Optional<Member> findById(Long id);
     Member update(Member memberUpdated, Long id);
     void delete(Long id);
+    Member getById(Long id);
+    List<Member> searchMembers(Long id, String name, String familyName);
+
 
 }

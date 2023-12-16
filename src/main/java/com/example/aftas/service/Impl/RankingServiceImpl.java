@@ -130,5 +130,15 @@ public class RankingServiceImpl implements RankingService {
         rankingRepository.delete(ranking);
     }
 
+    @Override
+    public List<Ranking> getPodium(String competitionCode) {
+        List<Ranking> rankings = sortParticipantsByScore(competitionCode);
+
+        if (rankings != null && rankings.size() >= 3) {
+            return rankings.subList(0, 3);
+        }
+        return rankings;
+    }
+
 
 }
